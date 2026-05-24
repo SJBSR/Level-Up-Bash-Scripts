@@ -1,0 +1,20 @@
+#!/bin/bash
+
+#Check if script is being run as root
+if [[ $EUID -ne 0 ]]; then
+    echo "Error: This script must be run as root!" >&2
+    exit 1
+fi
+
+#Create department directories and files
+
+sudo mkdir /usr/local/share/Analytics /usr/local/share/Development /usr/local/share/Operations && echo "Analytics, Development, and Operations directories created successfully."
+sudo touch /usr/local/share/Analytics/dmfile-1 /usr/local/share/Analytics/dmfile-2 /usr/local/share/Analytics/dmfile-3 /usr/local/share/Analytics/dmfile-4 && echo "dmfiles1-4 created successfully."
+sudo cp /usr/local/share/Analytics/* /usr/local/share/Development
+sudo cp /usr/local/share/Analytics/* /usr/local/share/Operations && echo "Files in Analytics directory copied to Development and Operations successfully."
+
+#Create groups for departments
+
+sudo groupadd Data_Analytics
+sudo groupadd Development
+sudo groupadd Operations && echo "Data_Analytics, Development, and Operations groups created successfully."
