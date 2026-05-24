@@ -1,0 +1,16 @@
+#!/bin/bash
+
+#Check if script is being run as root
+if [[ $EUID -ne 0 ]]; then
+    echo "Error: This script must be run as root!" >&2
+    exit 1
+fi
+
+#Assign directory ownership by user:department
+
+sudo chown -R jewart:Data_Analytics /usr/local/share/Analytics
+sudo chown -R jwaller:Development /usr/local/share/Development
+sudo chown -R bdorsery:Operations /usr/local/share/Operations
+sudo chmod 700 /usr/local/share/Analytics
+sudo chmod 700 /usr/local/share/Development
+sudo chmod 700 /usr/local/share/Operations && echo "Group ownership of directories assigned successfully."
